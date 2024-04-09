@@ -1,16 +1,43 @@
-let numeroSecreto = Math.floor(Math.random() * 5);
-let numeroTentativa = 3;
+let listanumeroDigitados = {};
 
-while (numeroTentativa > 0) {
-    let numeroDigitado = parseInt(prompt("digite um numero de 1 a 5"));
-    if (numeroDigitado === numeroSecreto){
-        alert("Parabéns voce acertou!");
-        break;
-    } else if (numeroDigitado > numeroSecreto){
-        alert('Voce digitou um numero maior que o numero secreto!');
-    } else {
-        alert('Voce digidou um numero menor que o numero secreto!');
+for(let i = 0; i < 30; i++){
+    alert(listanumeroDigitados[i]);
+    listanumeroDigitados = parseInt(prompt('Digite um numero'));
+    alert (listanumeroDigitados[i]);
+}
+function gerarNumeroAleatorio(index){
+    return Math.floor(Math.random() * index + 1);
+}
+
+function jogo () {
+    let numeroDePosicoesAleatorias = parseInt(prompt('Quantos númeos você quer aleatorizar'))
+    let numeroDeTentativas = parseInt(prompt('Em quantas tentativas você quer tentar adivinhas?'))
+    let numeroSecreto = gerarNumeroAleatorio(numeroDePosicoesAleatorias);
+
+    for(let tentativas = 0; tentativas < numeroDeTentativas; tentativas++){
+        let numeroDigitado = parseInt(prompt(`Digite um número de 1 a ${numeroDePosicoesAleatorias}`));
+        if(numeroDigitado === numeroSecreto){
+            alert('Parabéns, você acertou!');
+            break;
+        } else if(numeroDigitado > numeroSecreto){
+            alert('Você digitou um número maior que o número secreto');
+        } else {
+            alert('Você digitou um número menor que o número secreto');
+        }
+        if(tentativas === numeroDeTentativas){
+            alert(`Suas tentativas acabaram`);
+        } else if (tentativas <= numeroDeTentativas){
+            alert(`você ainda tem  ${numeroDeTentativas - tentativas - 1} tentativas`);   
+        }else{
+            alert(`você ainda tem  ${numeroDePosicoesAleatorias - tentativas - 1} tentativa`);
+        }    
     }
-     alert(`voce ainda tem ${numeroTentativa} tentativas`);
-     numeroTentativa = numeroTentativa - 1;
+    let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
+    if(tentativas < numeroDeTentativas){
+        alert(`Você acertou com ${tentativas} ${palavraTentativa}`)
+    }
+} 
+
+function clicou() {
+    jogo();
 }
